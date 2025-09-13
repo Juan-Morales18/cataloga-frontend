@@ -11,7 +11,7 @@ export default function Home() {
         <User className="size-6" />
       </Link>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="max-w-4xl mx-auto text-center">
         <div className="inline-flex items-center justify-center p-2 bg-white/20 rounded-2xl mb-6 backdrop-blur-sm">
           <BookOpen className="size-16 text-white" />
         </div>

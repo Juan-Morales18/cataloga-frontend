@@ -1,7 +1,5 @@
 import { ProductCard } from "@/components/catalog/product-card";
 import { getProducts } from "@/services/api.demo";
-import { ArrowLeft, Search, Filter } from "lucide-react";
-import Link from "next/link";
 
 export default async function CatalogPage() {
   const products = await getProducts();
