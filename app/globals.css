@@ -4,39 +4,119 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Mi Tierrita Color Palette */
+  --color-terracotta-50: #FDF7F4;
+  --color-terracotta-100: #FAEDE7;
+  --color-terracotta-200: #F4D9CC;
+  --color-terracotta-300: #EBB8A3;
+  --color-terracotta-400: #E09273;
+  --color-terracotta-500: #C56B4D;
+  --color-terracotta-600: #B55A3F;
+  --color-terracotta-700: #9A4A33;
+  --color-terracotta-800: #7F3D2A;
+  --color-terracotta-900: #6B3323;
+  --color-terracotta-950: #3A1B12;
+
+  --color-magenta-50: #FDF2F8;
+  --color-magenta-100: #FCE7F3;
+  --color-magenta-200: #F9D1E7;
+  --color-magenta-300: #F5A8D3;
+  --color-magenta-400: #F071B8;
+  --color-magenta-500: #E43C6E;
+  --color-magenta-600: #D1265A;
+  --color-magenta-700: #B01D4A;
+  --color-magenta-800: #921B3E;
+  --color-magenta-900: #7A1B36;
+  --color-magenta-950: #4A0A1F;
+
+  --color-teal-50: #F0FDFC;
+  --color-teal-100: #CCFBF1;
+  --color-teal-200: #99F6E4;
+  --color-teal-300: #5EEAD4;
+  --color-teal-400: #2DD4BF;
+  --color-teal-500: #23B0A7;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+  --color-teal-800: #115E59;
+  --color-teal-900: #134E4A;
+  --color-teal-950: #042F2E;
+
+  --color-yellow-50: #FFFBEB;
+  --color-yellow-100: #FEF3C7;
+  --color-yellow-200: #FDE68A;
+  --color-yellow-300: #FCD34D;
+  --color-yellow-400: #F6B73E;
+  --color-yellow-500: #F59E0B;
+  --color-yellow-600: #D97706;
+  --color-yellow-700: #B45309;
+  --color-yellow-800: #92400E;
+  --color-yellow-900: #78350F;
+  --color-yellow-950: #451A03;
+
+  --color-cream-50: #FEFCFB;
+  --color-cream-100: #FDF9F6;
+  --color-cream-200: #FBF2ED;
+  --color-cream-300: #F7E8DE;
+  --color-cream-400: #F5F0EC;
+  --color-cream-500: #F0E6DC;
+  --color-cream-600: #E8D4C4;
+  --color-cream-700: #DCC0A8;
+  --color-cream-800: #D1AC8C;
+  --color-cream-900: #C69970;
+  --color-cream-950: #B88657;
+
+  --color-navy-50: #F8F8FC;
+  --color-navy-100: #F1F1F8;
+  --color-navy-200: #E3E3F0;
+  --color-navy-300: #D0D0E5;
+  --color-navy-400: #B8B8D6;
+  --color-navy-500: #9B9BC4;
+  --color-navy-600: #7A7AAD;
+  --color-navy-700: #636396;
+  --color-navy-800: #52527A;
+  --color-navy-900: #3E3C6E;
+  --color-navy-950: #2A2849;
+
+  /* Semantic Colors */
+  --color-primary: var(--color-terracotta-500);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--color-magenta-500);
+  --color-secondary-foreground: #ffffff;
+  --color-accent: var(--color-teal-500);
+  --color-accent-foreground: #ffffff;
+  --color-warning: var(--color-yellow-400);
+  --color-warning-foreground: #ffffff;
+  --color-success: var(--color-teal-500);
+  --color-success-foreground: #ffffff;
+  --color-error: var(--color-magenta-500);
+  --color-error-foreground: #ffffff;
+  --color-info: var(--color-teal-500);
+  --color-info-foreground: #ffffff;
+
+  /* Layout Colors */
+  --color-background: var(--color-cream-400);
+  --color-foreground: var(--color-navy-900);
+  --color-text-primary: var(--color-navy-900);
+  --color-text-secondary: var(--color-navy-700);
+  --color-text-muted: var(--color-navy-500);
+
+  /* Existing theme variables */
+  --color-card: var(--color-cream-400);
+  --color-card-foreground: var(--color-navy-900);
+  --color-popover: var(--color-cream-400);
+  --color-popover-foreground: var(--color-navy-900);
+  --color-muted: var(--color-cream-100);
+  --color-muted-foreground: var(--color-navy-500);
+  --color-border: var(--color-terracotta-200);
+  --color-input: var(--color-terracotta-200);
+  --color-ring: var(--color-terracotta-500);
+  --color-destructive: var(--color-magenta-500);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
+
+  /* Border Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
