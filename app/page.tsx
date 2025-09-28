@@ -2,12 +2,13 @@ import { BookOpen, ChevronsRight, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import tierrita from "@/public/tierrita.png";
+import { getSessionServer } from "@/utils/amplify-utils";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Link
-        href={"/auth"}
+        href={"/login"}
         className="absolute right-4 top-4 inline-flex items-center px-4 py-3 text-white bg-primary  rounded-2xl transition-all duration-300 backdrop-blur-sm border border-primary/20 hover:border-primary/30 hover:scale-105 shadow-lg text-md"
       >
         <User className="size-6" />
