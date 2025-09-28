@@ -29,9 +29,9 @@ export function ProductManagement({
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const [createState, createAction] = useActionState(createProduct, null);
-  const [updateState, updateAction] = useActionState(updateProduct, null);
-  const [deleteState, deleteAction] = useActionState(deleteProduct, null);
+  const [createState, createAction] = useActionState(() => {}, null);
+  const [updateState, updateAction] = useActionState(() => {}, null);
+  const [deleteState, deleteAction] = useActionState(() => {}, null);
 
   const filteredProducts = products.filter(
     (product) =>
@@ -47,11 +47,6 @@ export function ProductManagement({
       formData.append(key, value as string);
     });
 
-    const result = await createAction(formData);
-    if (result?.success) {
-      setProducts((prev) => [...prev, { id: Date.now().toString(), ...data }]);
-      setShowForm(false);
-    }
     setIsLoading(false);
   };
 
@@ -65,24 +60,12 @@ export function ProductManagement({
       formData.append(key, value as string);
     });
 
-    const result = await updateAction(formData);
-    if (result?.success) {
-      setProducts((prev) =>
-        prev.map((p) => (p.id === editingProduct.id ? { ...p, ...data } : p))
-      );
-      setEditingProduct(undefined);
-    }
     setIsLoading(false);
   };
 
   const handleDeleteProduct = async (productId: string) => {
     if (!confirm("¿Estás seguro de que quieres eliminar este producto?"))
       return;
-
-    const result = await deleteAction(productId);
-    if (result?.success) {
-      setProducts((prev) => prev.filter((p) => p.id !== productId));
-    }
   };
 
   const handleEditProduct = (product: Product) => {
@@ -149,25 +132,6 @@ export function ProductManagement({
           product={viewingProduct}
           onClose={() => setViewingProduct(undefined)}
         />
-      )}
-
-      {/* Error Messages */}
-      {createState?.error && (
-        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-          <p className="text-sm text-destructive">{createState.error}</p>
-        </div>
-      )}
-
-      {updateState?.error && (
-        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-          <p className="text-sm text-destructive">{updateState.error}</p>
-        </div>
-      )}
-
-      {deleteState?.error && (
-        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-          <p className="text-sm text-destructive">{deleteState.error}</p>
-        </div>
       )}
     </div>
   );
