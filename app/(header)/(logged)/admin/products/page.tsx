@@ -1,6 +1,6 @@
 import { AdminLayout } from "@/components/admin/admin-layout";
-import { ProductManagement } from "@/components/admin/product-management";
 import { getProducts } from "@/actions/products";
+import { ProductManagement } from "@/components/admin/product-management";
 
 export default async function AdminProductsPage() {
   const products = await getProducts();
