@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInAction } from "@/actions/auth";
 import { useActionState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 import { PasswordInput } from "../ui/password-input";
 
@@ -24,16 +23,19 @@ export function LoginForm() {
     signInAction,
     undefined
   );
-  const router = useRouter();
 
   useEffect(() => {
     console.log("state: ", state);
-    if (state && !isPending) {
+    if (state && !isPending && REDIRECT_STEPS.includes(state)) {
       console.log("Redirect Inside: ", state);
       console.log("REDIRECT_PATHS[state]: ", REDIRECT_PATHS[state]);
-      router.push(REDIRECT_PATHS[state]);
+
+      const redirectPath = REDIRECT_PATHS[state];
+      if (redirectPath) {
+        window.location.replace(redirectPath);
+      }
     }
-  }, [state, router, isPending]);
+  }, [state, isPending]);
 
   return (
     <div className="flex items-center justify-center mt-16">
@@ -84,9 +86,10 @@ export function LoginForm() {
 
           <Button
             type="submit"
-            className="w-full bg-primary border border-white/30 hover:cursor-pointer hover:border-white/50 transition-all duration-300 hover:scale-105 shadow-lg"
+            disabled={isPending}
+            className="w-full bg-primary border border-white/30 hover:cursor-pointer hover:border-white/50 transition-all duration-300 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Iniciar sesión
+            {isPending ? "Iniciando sesión..." : "Iniciar sesión"}
           </Button>
         </form>
 
