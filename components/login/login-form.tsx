@@ -20,16 +20,20 @@ const REDIRECT_PATHS = {
 };
 
 export function LoginForm() {
-  const [state, formAction] = useActionState(signInAction, undefined);
+  const [state, formAction, isPending] = useActionState(
+    signInAction,
+    undefined
+  );
   const router = useRouter();
 
   useEffect(() => {
     console.log("state: ", state);
-    if (state) {
+    if (state && !isPending) {
+      console.log("Redirect Inside: ", state);
+      console.log("REDIRECT_PATHS[state]: ", REDIRECT_PATHS[state]);
       router.push(REDIRECT_PATHS[state]);
-      console.log("state: ", state);
     }
-  }, [state, router]);
+  }, [state, router, isPending]);
 
   return (
     <div className="flex items-center justify-center mt-16">
