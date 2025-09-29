@@ -74,7 +74,7 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-3">
                 <div className="h-2 w-2 bg-success rounded-full"></div>
                 <p className="text-sm text-text-secondary">
-                  Nuevo producto "Tazón Artesanal" fue agregado
+                  Nuevo producto Tazón Artesanal fue agregado
                 </p>
                 <span className="text-xs text-text-muted ml-auto">
                   hace 2 horas
@@ -83,7 +83,7 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-3">
                 <div className="h-2 w-2 bg-primary rounded-full"></div>
                 <p className="text-sm text-text-secondary">
-                  Producto "Jarrón de Cerámica" fue actualizado
+                  Producto Jarrón de Cerámica fue actualizado
                 </p>
                 <span className="text-xs text-text-muted ml-auto">
                   hace 4 horas
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-3">
                 <div className="h-2 w-2 bg-warning rounded-full"></div>
                 <p className="text-sm text-text-secondary">
-                  Usuario "john@example.com" se registró
+                  Usuario john@example.com se registró
                 </p>
                 <span className="text-xs text-text-muted ml-auto">
                   hace 6 horas

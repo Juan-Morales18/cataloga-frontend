@@ -8,12 +8,6 @@ import { ProductDialog } from "./product-dialog";
 import { Button } from "@/components/ui/button";
 import { Plus, Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import {
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} from "@/actions/products";
-import { useActionState } from "react";
 
 interface ProductManagementProps {
   products: Product[];
@@ -22,51 +16,10 @@ interface ProductManagementProps {
 export function ProductManagement({
   products: initialProducts,
 }: ProductManagementProps) {
-  const [products, setProducts] = useState(initialProducts);
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | undefined>();
   const [viewingProduct, setViewingProduct] = useState<Product | undefined>();
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [createState, createAction] = useActionState(() => {}, null);
-  const [updateState, updateAction] = useActionState(() => {}, null);
-  const [deleteState, deleteAction] = useActionState(() => {}, null);
-
-  const filteredProducts = products.filter(
-    (product) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleCreateProduct = async (data: any) => {
-    setIsLoading(true);
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-
-    setIsLoading(false);
-  };
-
-  const handleUpdateProduct = async (data: any) => {
-    if (!editingProduct) return;
-
-    setIsLoading(true);
-    const formData = new FormData();
-    formData.append("id", editingProduct.id);
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-
-    setIsLoading(false);
-  };
-
-  const handleDeleteProduct = async (productId: string) => {
-    if (!confirm("¿Estás seguro de que quieres eliminar este producto?"))
-      return;
-  };
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
@@ -112,18 +65,17 @@ export function ProductManagement({
       {showForm && (
         <ProductForm
           product={editingProduct}
-          onSubmit={editingProduct ? handleUpdateProduct : handleCreateProduct}
+          onSubmit={() => {}}
           onCancel={handleCancelForm}
-          isLoading={isLoading}
         />
       )}
 
       {/* Product Table */}
       <ProductTable
-        products={filteredProducts}
+        products={initialProducts}
         onEdit={handleEditProduct}
-        onDelete={handleDeleteProduct}
         onView={handleViewProduct}
+        onDelete={() => {}}
       />
 
       {/* Product Dialog */}

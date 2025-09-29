@@ -123,7 +123,7 @@ export default function AdminAnalyticsPage() {
             <div className="flex items-center gap-3">
               <div className="h-2 w-2 bg-primary rounded-full"></div>
               <p className="text-sm text-text-secondary">
-                Product "Ceramic Bowl" was updated
+                Product Ceramic Bowl was updated
               </p>
               <span className="text-xs text-text-muted ml-auto">
                 1 hour ago
@@ -132,7 +132,7 @@ export default function AdminAnalyticsPage() {
             <div className="flex items-center gap-3">
               <div className="h-2 w-2 bg-warning rounded-full"></div>
               <p className="text-sm text-text-secondary">
-                User "jane@example.com" signed up
+                User jane@example.com signed up
               </p>
               <span className="text-xs text-text-muted ml-auto">
                 2 hours ago

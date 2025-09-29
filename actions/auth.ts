@@ -16,7 +16,7 @@ export async function signInAction(
   try {
     const res = await signIn({
       username: email,
-      password: password,
+      password,
     });
 
     if (KNOWN_SIGN_IN_STEPS.includes(res.nextStep.signInStep)) {
@@ -37,12 +37,13 @@ export async function confirmNewPasswordAction(
   const newPassword = String(formData.get("confirmNewPassword"));
 
   try {
-    const res = await confirmSignIn({
+    await confirmSignIn({
       challengeResponse: newPassword,
     });
 
     return "SUCCESS";
-  } catch (error) {
+  } catch (e) {
+    console.error("Error al confirmar la nueva contraseña: ", e);
     return "ERROR_SETTING_NEW_PASSWORD";
   }
 }

@@ -1,8 +1,7 @@
-import { BookOpen, ChevronsRight, User } from "lucide-react";
+import { ChevronsRight, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import tierrita from "@/public/tierrita.png";
-import { getSessionServer } from "@/utils/amplify-utils";
 
 export default async function Home() {
   return (

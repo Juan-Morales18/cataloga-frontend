@@ -3,14 +3,7 @@
 import { useState } from "react";
 import { Product } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import {
-  Edit,
-  Trash2,
-  Eye,
-  MoreHorizontal,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Edit, Trash2, Eye, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface ProductTableProps {

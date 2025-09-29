@@ -4,7 +4,7 @@ import { Product } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 
 // Mock data store - in a real app, this would be a database
-let products: Product[] = [
+const products: Product[] = [
   {
     id: "1",
     title: "Artisan Ceramic Bowl",
@@ -70,7 +70,8 @@ export async function createProduct(
     revalidatePath("/admin/products");
 
     return { success: true };
-  } catch (error) {
+  } catch (e) {
+    console.error("Error al crear el producto: ", e);
     return { success: false, error: "Failed to create product" };
   }
 }
@@ -107,7 +108,8 @@ export async function updateProduct(
     revalidatePath("/admin/products");
 
     return { success: true };
-  } catch (error) {
+  } catch (e) {
+    console.error("Error al actualizar el producto: ", e);
     return { success: false, error: "Failed to update product" };
   }
 }
@@ -125,7 +127,8 @@ export async function deleteProduct(
     revalidatePath("/admin/products");
 
     return { success: true };
-  } catch (error) {
+  } catch (e) {
+    console.error("Error al eliminar el producto: ", e);
     return { success: false, error: "Failed to delete product" };
   }
 }

@@ -3,8 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInAction } from "@/actions/auth";
-import { useActionState } from "react";
-import { useEffect } from "react";
+import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 
@@ -24,7 +23,9 @@ export function LoginForm() {
   const router = useRouter();
 
   useEffect(() => {
-    state && router.push(REDIRECT_PATHS[state]);
+    if (state) {
+      router.push(REDIRECT_PATHS[state]);
+    }
   }, [state, router]);
 
   return (
