@@ -1,7 +1,33 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signInAction } from "@/actions/auth";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 
-export default function AuthPage() {
+const REDIRECT_STEPS = [
+  SignInStepValues.DONE,
+  SignInStepValues.CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED,
+];
+
+const REDIRECT_PATHS = {
+  [SignInStepValues.DONE]: "/catalog",
+  [SignInStepValues.CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED]:
+    "/login/set-new-password",
+};
+
+export function LoginForm() {
+  const [state, formAction] = useActionState(signInAction, undefined);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state) {
+      router.push(REDIRECT_PATHS[state]);
+    }
+  }, [state, router]);
+
   return (
     <div className="flex items-center justify-center mt-16">
       <div className="w-full max-w-md p-8 bg-background backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20">
@@ -12,7 +38,13 @@ export default function AuthPage() {
           <p className="text-terracotta-500">Accede a tu cuenta de Tierrita</p>
         </div>
 
-        <form className="space-y-6">
+        {state && !REDIRECT_STEPS.includes(state) && (
+          <div className="mb-4 p-3 bg-error/10 border border-error/20 rounded-lg">
+            <p className="text-error text-sm text-center">{state}</p>
+          </div>
+        )}
+
+        <form className="space-y-6" action={formAction}>
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-primary">
               Correo electrónico

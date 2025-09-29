@@ -12,7 +12,7 @@ export async function getProducts(): Promise<Product[] | null> {
 
     return null;
   } catch (e) {
-    console.error("An error ocurred");
+    console.error("An error ocurred: ", e);
     return null;
   }
 }

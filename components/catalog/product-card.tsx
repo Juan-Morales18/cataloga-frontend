@@ -1,6 +1,6 @@
 import { Product } from "@/lib/types";
 import Image from "next/image";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 
 type Props = {
   product: Product;
