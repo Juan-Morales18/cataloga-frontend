@@ -36,6 +36,6 @@ export const config = {
      * - auth (authentication pages)
      * - public assets
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|auth|public).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|login|public).*)",
   ],
 };
