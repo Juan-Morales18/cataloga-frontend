@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInAction } from "@/actions/auth";
 import { useActionState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 import { PasswordInput } from "../ui/password-input";
 
@@ -24,7 +23,6 @@ export function LoginForm() {
     signInAction,
     undefined
   );
-  const router = useRouter();
 
   useEffect(() => {
     console.log("state: ", state);
@@ -34,8 +32,6 @@ export function LoginForm() {
 
       const redirectPath = REDIRECT_PATHS[state];
       if (redirectPath) {
-        // Use window.location.replace for reliable redirects in production
-        // This is the standard approach for authentication redirects
         window.location.replace(redirectPath);
       }
     }
