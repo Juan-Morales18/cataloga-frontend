@@ -6,6 +6,7 @@ import { signInAction } from "@/actions/auth";
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
+import { PasswordInput } from "../ui/password-input";
 
 const REDIRECT_STEPS = [
   SignInStepValues.DONE,
@@ -23,8 +24,10 @@ export function LoginForm() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("state: ", state);
     if (state) {
       router.push(REDIRECT_PATHS[state]);
+      console.log("state: ", state);
     }
   }, [state, router]);
 
@@ -66,9 +69,8 @@ export function LoginForm() {
             >
               Contraseña
             </label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               placeholder="••••••••"
               name="password"
               className="text-primary focus:bg-white/30 focus:border-white/50"
