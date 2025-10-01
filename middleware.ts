@@ -14,10 +14,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  if (isSession) {
-    return response;
-  }
-
   if (!isSession && pathname !== "/login" && pathname !== "/") {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -36,6 +32,6 @@ export const config = {
      * - auth (authentication pages)
      * - public assets
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|login|public).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|public).*)",
   ],
 };

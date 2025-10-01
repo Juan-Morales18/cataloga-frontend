@@ -6,6 +6,7 @@ import { signInAction } from "@/actions/auth";
 import { useActionState, useEffect } from "react";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 import { PasswordInput } from "../ui/password-input";
+import { useRouter } from "next/navigation";
 
 const REDIRECT_STEPS = [
   SignInStepValues.DONE,
@@ -24,18 +25,13 @@ export function LoginForm() {
     undefined
   );
 
-  useEffect(() => {
-    console.log("state: ", state);
-    if (state && !isPending && REDIRECT_STEPS.includes(state)) {
-      console.log("Redirect Inside: ", state);
-      console.log("REDIRECT_PATHS[state]: ", REDIRECT_PATHS[state]);
+  const router = useRouter();
 
-      const redirectPath = REDIRECT_PATHS[state];
-      if (redirectPath) {
-        window.location.replace(redirectPath);
-      }
+  useEffect(() => {
+    if (state && !isPending && REDIRECT_STEPS.includes(state)) {
+      router.push(REDIRECT_PATHS[state]);
     }
-  }, [state, isPending]);
+  }, [state, isPending, router]);
 
   return (
     <div className="flex items-center justify-center mt-16">
