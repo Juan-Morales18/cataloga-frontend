@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -12,6 +12,9 @@ import {
   LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { toast } from "sonner";
+import { signOutService } from "@/services/auth";
 
 const navigation = [
   {
@@ -43,6 +46,23 @@ const navigation = [
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignOut = async () => {
+    setIsLoading(true);
+    const response = await signOutService();
+    setIsLoading(false);
+
+    if (response === "SUCCESS") {
+      router.replace("/login");
+    } else {
+      toast.error("Error al cerrar sesión", {
+        description: "Por favor, intenta nuevamente",
+        position: "top-center",
+      });
+    }
+  };
 
   return (
     <div className="flex h-full w-64 flex-col bg-card border-r border-border">
@@ -74,10 +94,12 @@ export function AdminSidebar() {
       <div className="p-4 border-t border-border">
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 text-text-secondary hover:text-text-primary"
+          className="w-full justify-start gap-3 text-text-secondary hover:text-text-primary hover:cursor-pointer"
+          onClick={handleSignOut}
+          disabled={isLoading}
         >
           <LogOut className="h-4 w-4" />
-          Cerrar Sesión
+          {isLoading ? "Cerrando sesión..." : "Cerrar Sesión"}
         </Button>
       </div>
     </div>

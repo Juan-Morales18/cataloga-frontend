@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInAction } from "@/actions/auth";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 import { PasswordInput } from "../ui/password-input";
 import { useRouter } from "next/navigation";
@@ -25,13 +25,28 @@ export function LoginForm() {
     undefined
   );
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const router = useRouter();
 
   useEffect(() => {
-    if (state && !isPending && REDIRECT_STEPS.includes(state)) {
+    if (state && REDIRECT_STEPS.includes(state)) {
+      setFormData({ email: "", password: "" });
       router.push(REDIRECT_PATHS[state]);
     }
-  }, [state, isPending, router]);
+  }, [state, router]);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const hasError = state && !REDIRECT_STEPS.includes(state);
 
   return (
     <div className="flex items-center justify-center mt-16">
@@ -43,9 +58,11 @@ export function LoginForm() {
           <p className="text-terracotta-500">Accede a tu cuenta de Tierrita</p>
         </div>
 
-        {state && !REDIRECT_STEPS.includes(state) && (
+        {hasError && (
           <div className="mb-4 p-3 bg-error/10 border border-error/20 rounded-lg">
-            <p className="text-error text-sm text-center">{state}</p>
+            <p className="text-error text-sm text-center">
+              Error: revisa tu correo electrónico y contraseña
+            </p>
           </div>
         )}
 
@@ -59,6 +76,8 @@ export function LoginForm() {
               type="email"
               placeholder="tu@email.com"
               name="email"
+              value={formData.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
               className="text-primary  focus:bg-white/30 focus:border-white/50"
               required
             />
@@ -75,6 +94,8 @@ export function LoginForm() {
               id="password"
               placeholder="••••••••"
               name="password"
+              value={formData.password}
+              onChange={(e) => handleInputChange("password", e.target.value)}
               className="text-primary focus:bg-white/30 focus:border-white/50"
               required
             />

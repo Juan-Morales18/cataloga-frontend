@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import ConfigureAmplifyClientSide from "@/utils/amplify-config";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased bg-background`}>
         <ConfigureAmplifyClientSide />
         {children}
+        <Toaster />
       </body>
     </html>
   );
