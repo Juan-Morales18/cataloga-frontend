@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 import { signOutService } from "@/services/auth";
+import { revalidateClientPath } from "@/utils/revalidate-path";
 
 const navigation = [
   {
@@ -55,6 +56,7 @@ export function AdminSidebar() {
     setIsLoading(false);
 
     if (response === "SUCCESS") {
+      revalidateClientPath("/");
       router.replace("/login");
     } else {
       toast.error("Error al cerrar sesión", {
