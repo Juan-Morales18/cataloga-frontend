@@ -28,24 +28,25 @@ export async function getCurrentUserServer() {
   }
 }
 
-export async function getSessionServer(context: NextServer.Context) {
-  const result = await runWithAmplifyServerContext({
+export async function getAutheticatedUser(context: NextServer.Context) {
+  return await runWithAmplifyServerContext({
     nextServerContext: context,
     operation: async (contextSpec) => {
       try {
         const session = await fetchAuthSession(contextSpec);
-
-        if (!session.tokens?.accessToken) {
-          throw new Error("No access token found");
+        if (!session.tokens) {
+          return;
         }
 
-        return session;
+        const user = {
+          ...(await getCurrentUser(contextSpec)),
+          token: session.tokens.accessToken.toString(),
+        };
+
+        return user;
       } catch (error) {
-        console.error("Session error:", error);
-        return null;
+        console.error(error);
       }
     },
   });
-
-  return result;
 }

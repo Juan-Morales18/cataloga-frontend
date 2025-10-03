@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionServer } from "@/utils/amplify-utils";
-import { AuthSession } from "aws-amplify/auth";
+import { getAutheticatedUser } from "@/utils/amplify-utils";
 
 const PUBLIC_ROUTES = ["/", "/login", "/catalog"];
 const PROTECTED_ROUTES = ["/admin"];
@@ -13,20 +12,16 @@ function isProtectedRoute(pathname: string): boolean {
   return PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
 }
 
-function isValidSession(session: AuthSession | null): boolean {
-  return Boolean(session && session.tokens?.accessToken);
-}
-
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const response = NextResponse.next();
 
-  const session = await getSessionServer({
+  const user = await getAutheticatedUser({
     request,
     response,
   });
 
-  const hasValidSession = isValidSession(session);
+  const hasValidSession = Boolean(user);
 
   if (isPublicRoute(pathname)) {
     if (hasValidSession && pathname === "/login") {
