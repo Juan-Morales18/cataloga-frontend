@@ -5,10 +5,14 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const response = NextResponse.next();
 
-  const isSession = await getSessionServer({
+  const session = await getSessionServer({
     request,
     response,
   });
+
+  console.log("Session: ", JSON.stringify(session, null, 2));
+
+  const isSession = session && session.tokens?.accessToken;
 
   if (isSession && pathname === "/login") {
     return NextResponse.redirect(new URL("/admin", request.url));
