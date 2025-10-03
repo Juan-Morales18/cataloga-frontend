@@ -7,6 +7,7 @@ import { useActionState, useEffect, useState } from "react";
 import { SignInStepValues } from "@/utils/constants/sign-in-step-values";
 import { PasswordInput } from "../ui/password-input";
 import { useRouter } from "next/navigation";
+import { revalidateClientPath } from "@/utils/revalidate-path";
 
 const REDIRECT_STEPS = [
   SignInStepValues.DONE,
@@ -35,6 +36,7 @@ export function LoginForm() {
   useEffect(() => {
     if (state && REDIRECT_STEPS.includes(state)) {
       setFormData({ email: "", password: "" });
+      revalidateClientPath("/");
       router.push(REDIRECT_PATHS[state]);
     }
   }, [state, router]);
