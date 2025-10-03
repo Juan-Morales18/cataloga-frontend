@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionServer } from "@/utils/amplify-utils";
+import { AuthSession } from "aws-amplify/auth";
+
+const PROTECTED_ROUTES = ["/admin"];
+
+function isProtectedRoute(pathname: string): boolean {
+  return PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
+}
+
+function isValidSession(session: AuthSession | null): boolean {
+  return Boolean(session && session.tokens?.accessToken);
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -10,20 +21,13 @@ export async function middleware(request: NextRequest) {
     response,
   });
 
-  console.log("Session: ", JSON.stringify(session, null, 2));
+  const hasValidSession = isValidSession(session);
 
-  const isSession = session && session.tokens?.accessToken;
-
-  if (isSession && pathname === "/login") {
+  if (hasValidSession && pathname === "/login") {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  if (
-    !isSession &&
-    pathname !== "/login" &&
-    pathname !== "/" &&
-    pathname !== "/catalog"
-  ) {
+  if (!hasValidSession && isProtectedRoute(pathname)) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

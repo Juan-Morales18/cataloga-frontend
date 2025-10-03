@@ -51,7 +51,7 @@ export function SetNewPasswordForm() {
 
   useEffect(() => {
     if (state === "SUCCESS") {
-      router.push("/catalog");
+      router.push("/admin");
     }
   }, [state, router]);
 
