@@ -14,7 +14,7 @@ const REDIRECT_STEPS = [
 ];
 
 const REDIRECT_PATHS = {
-  [SignInStepValues.DONE]: "/catalog",
+  [SignInStepValues.DONE]: "/admin",
   [SignInStepValues.CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED]:
     "/login/set-new-password",
 };
